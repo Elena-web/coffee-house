@@ -1,0 +1,47 @@
+.nav__list {
+    display: flex;
+    @include media-tablet {
+      display: none;
+    }
+}
+
+.nav__list li {
+    margin-right: 4rem;
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.nav__link {
+    @extend %font-prim;
+    @include font ($size: 1.6rem, $height: 1.5, $weight: 600, $style: normal);
+    font-feature-settings: 'clig' off, 'liga' off;
+    color: $color-dark;
+    position: relative;
+}
+
+.nav__link:before {
+    position:absolute;
+    bottom: -.4rem;
+    content: " ";
+    border-bottom: .2rem solid $color-dark;
+    left: 50%;
+    width: 0%;
+    transition: all 0.8s;
+}
+@media (hover: hover) and (pointer: fine) {
+    .nav__link:hover:before{
+    width:100%;
+    left: 0%;
+ }
+}
+
+
+.nav__link.active {
+    border-bottom: .2rem solid $color-dark;
+}
+
+.nav__link.disabled {
+    pointer-events: none; 
+    cursor: default;
+}

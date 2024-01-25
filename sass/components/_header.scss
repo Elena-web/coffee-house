@@ -1,0 +1,34 @@
+.header {
+    margin-bottom: 2rem;
+}
+
+.header__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__logo {
+    width: 10rem;
+    height: 6rem;
+}
+
+.header__btn {
+    display: flex;
+    align-items:flex-start;
+    @include media-tablet {
+        display: none;
+    }
+}
+
+.header__btn a {
+    display: flex;
+    align-items: flex-start;
+    @extend %font-prim;
+    @include font ($size: 1.6rem, $height: 1.5, $weight: 600, $style: normal);
+    font-feature-settings: 'clig' off, 'liga' off;
+    color: $color-dark;
+    & svg {
+        margin-left: .8rem;
+    }
+}

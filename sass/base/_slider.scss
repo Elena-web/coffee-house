@@ -1,0 +1,160 @@
+.slider {
+    padding: 0 .3rem 0 .3rem;    
+    @include media-tabletbig {
+        padding: 0 .1rem 0 .1rem;
+    }
+    @include media-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    @include media-mobile-small {
+        padding: 0;
+    }
+}
+
+.slider__wrap {
+    max-width: 48rem;
+    overflow: hidden;
+    @include media-mobile-small {
+        max-width: 34.8rem;
+    }
+}
+
+.slider__row {
+    position: relative;
+    left: 0;
+    width: 144rem;   
+    display: flex;    
+    transition: all ease 1s;
+    @include media-mobile-small {
+        
+    }
+}
+.slider__block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.slider__item {
+    max-width: 48rem;   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include media-mobile-small {
+        width: 34.8rem; 
+    }
+}
+
+.slider__img {
+    height: 48rem;
+    margin-bottom: 2rem;
+    @include media-mobile-small {
+        height: 34.8rem;
+    }
+}
+
+.slider__subtitle {
+    text-align: center;
+    @extend %font-prim;
+    @include font ($size: 2.4rem, $height: 1.25, $weight: 600, $style: normal);
+    font-feature-settings: 'clig' off, 'liga' off;
+    color: $color-dark;
+    margin-bottom: 1.6rem;
+}
+.slider__txt {
+    text-align: center;
+    @extend %font-prim;
+    @include font ($size: 1.6rem, $height: 1.5, $weight: 400, $style: normal);
+    font-feature-settings: 'clig' off, 'liga' off;
+    color: $color-dark;
+    margin-bottom: 1.6rem;    
+}
+
+.btn-prev,
+.btn-next {
+    margin-top: -1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    border: .1rem solid $color-container;
+    transition: all .8s linear;    
+    @include media-mobile {
+        display: none;
+    }    
+}
+@media (hover: hover) and (pointer: fine) {
+    .btn-prev:hover,
+    .btn-next:hover {
+        cursor: pointer;
+        transition: all .3s linear;
+        background-color: $color-container;
+        & path {
+            transition: all .4s linear;
+            stroke: $color-light;
+        }
+    }
+}
+.pagination {
+    margin-top: 2.4rem;    
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    align-items: center;
+}
+.pagination__item {
+    background-color: $color-boder;
+    width: 4rem;
+    height: .4rem;
+    border-radius: 10rem;
+    margin-right: 1.2rem;
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.item--active {
+    width: 4rem;
+    height: .4rem;
+    border-radius: 10rem;
+    background-color: $color-boder;
+}
+
+.pagination__item .prog {
+    display: none;
+    width: 4rem;
+    height: .4rem;
+    border-radius: 10rem;
+    background-color: $color-container;
+    animation-play-state: running;
+    animation: color 5s infinite;
+}
+
+@keyframes color {
+    from {
+        left: 0;
+        background-color: $color-container;
+        width: 0;
+    }
+    to {
+        left: 100%;
+        background-color: $color-container;
+        width: 40px;
+    }
+}
+
+.item--active .prog {
+    display: block;
+}
+
+.slider__item:hover{
+    cursor: pointer;
+}
+
+.slider__item:hover .prog {
+    animation-play-state: paused;
+}

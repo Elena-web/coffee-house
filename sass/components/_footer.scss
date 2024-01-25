@@ -1,0 +1,118 @@
+.footer__row {
+    border-radius: 4rem;
+    background-color: $color-container;
+    padding: 10rem;
+    display: flex;
+    justify-content: space-between;
+    @include media-tabletbig {
+        flex-direction: column;
+        padding: 10rem 6rem 10.3rem 6rem;
+    }
+    @include media-mobile {
+        padding: 6rem 1.6rem 6.3rem 1.6rem;
+    }
+}
+
+.footer__col {
+    width: 45.7%;
+    @include media-tabletbig {
+        width: 100%;
+        margin-bottom: 10rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    @include media-mobile {
+        margin-bottom: 4rem;
+    }
+}
+
+.footer__col h2 {
+    text-align: left;
+    color: $color-light;
+}
+
+.footer__socials {
+    display: flex;
+}
+
+.footer__social {
+    cursor: pointer;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 10rem;
+    border: .1rem solid $color-boder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.2rem;
+    &:last-child {
+        margin-right: 0;
+    }
+}
+@media (hover: hover) and (pointer: fine) {
+    .footer__social:hover {
+    transition: all 1s linear;
+    background-color: $color-light;
+}
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .footer__social:hover path {
+    stroke: $color-dark;
+    transition: all 0.3s linear;
+}
+}
+
+.footer__col p {
+    @extend %font-prim;
+    @include font ($size: 2.4rem, $height: 1.25, $weight: 600, $style: normal);
+    font-feature-settings: 'clig' off, 'liga' off;
+    color: $color-light;
+    margin: 3.2rem 0 4rem 0;
+    @include media-tabletbig {
+        margin: 0 0 3.8rem 0;
+    }
+}
+
+.footer__contacts,
+.footer__contacts a {
+    @extend %font-prim;
+    @include font ($size: 1.6rem, $height: 1.5, $weight: 600, $style: normal);
+    font-feature-settings: 'clig' off, 'liga' off;
+    color: $color-light;
+    position: relative;
+}
+
+.footer__contacts a::before {
+    position:absolute;
+    bottom: -.4rem;
+    content: " ";
+    border-bottom: .2rem solid $color-light;
+    left:50%;
+    width:0%;
+    transition: all 0.8s;
+}
+@media (hover: hover) and (pointer: fine) {
+    .footer__contacts a:hover:before{
+    width: 100%;
+    left: 0%;
+ }
+}
+
+.footer__contacts li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.7rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    @include media-tabletbig {
+        margin-bottom: 1.85rem;
+    }
+}
+
+.footer__contacts svg {
+    margin-right: 0.7rem;
+}
+
