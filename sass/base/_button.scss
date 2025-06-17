@@ -9,7 +9,8 @@
     @extend %font-prim;
     font-feature-settings: 'clig' off, 'liga' off;
     @include font ($size: 1.6rem, $height: 1.5, $weight: 600, $style: normal);    
-    text-align: center;    
+    text-align: center;
+	transition: all 0.8s linear;    
 }
 
 .btn {
@@ -23,13 +24,13 @@
     border: .1rem solid $color-dark;
     width: 20rem;
     height: 6.4rem;
+	transition: all 0.8s linear;
 }
+
 @media (hover: hover) and (pointer: fine) {
-    .btn:hover {
-    transition: all 0.8s linear;
+    .btn:hover {    
     background-color: $color-container;
     & path {
-        transition: all 0.8s linear;
         fill: $color-light;
     }
 }
@@ -45,7 +46,6 @@
 @media (hover: hover) and (pointer: fine){
     .btn:hover p,
     .btn:hover span {
-        transition: all 0.8s linear;
         color: $color-light;
 }
 }

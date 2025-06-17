@@ -161,11 +161,11 @@
     @include font ($size: 1.6rem, $height: 1.5, $weight: 600, $style: normal);
     font-feature-settings: 'clig' off, 'liga' off;
     background-color: transparent;
+	transition: all 0.8s linear;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .popup__btn:hover {
-    transition: all 0.8s linear;
+    .popup__btn:hover {    
     background-color: $color-container;
     color: $color-light;
     }

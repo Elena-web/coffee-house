@@ -91,10 +91,8 @@
     .btn-prev:hover,
     .btn-next:hover {
         cursor: pointer;
-        transition: all .3s linear;
         background-color: $color-container;
         & path {
-            transition: all .4s linear;
             stroke: $color-light;
         }
     }

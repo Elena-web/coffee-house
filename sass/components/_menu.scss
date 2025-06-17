@@ -33,6 +33,7 @@
    @include font ($size: 1.6rem, $height: 1.5, $weight: 600, $style: normal);
    font-feature-settings: 'clig' off, 'liga' off;
    color: $color-dark;
+   transition: all 0.8s;
    &:last-child{
     margin-right: 0;
    }
@@ -40,9 +41,9 @@
     margin-right: 0.8rem;
    }
 }
+
 @media (hover: hover) and (pointer: fine) {
-    .menu__link:hover {
-    transition: all 0.8s;
+    .menu__link:hover {    
     background-color: $color-container;
     color: $color-light;
     }
@@ -69,7 +70,6 @@
 
 @media (hover: hover) and (pointer: fine) {
     .menu__link:hover .menu__icon {
-    transition: all 0.8s;
     background-color: $color-body;
     }
 }
