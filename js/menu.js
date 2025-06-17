@@ -764,60 +764,82 @@ const products = [
     }
   ];
 
-  const productsBox = document.getElementsByClassName('products-box')[0];
-  const productCards = document.querySelectorAll('.menu__card');
+const productsBox = document.getElementsByClassName('products-box')[0];
+const productCards = document.querySelectorAll('.menu__card');
 
-  function popupShow(product) {
-    let popup = document.createElement('div');
-    popup.classList.add('popup');
-    popup.innerHTML = `
-      <div class="popup__wrap">
-          <div class="popup__col left">
-            <div class="popup__img">
-              <img src="${product.image}" class="image" alt="Product">
-            </div>
-          </div>
-          <div class="popup__col right">
-            <h4 class="card__subtitle">${product.name}</h4>
-            <p class="card__txt">${product.description}</p>
-            <form action="" class="form">
-              <p class="popup__txt">Size</p>
-              <div class="size">
-                ${Object.keys(product.sizes).map((size) => `
-                <input type="radio" name="size" class="custom-radio" id="${size}" ${size === 's' ? 'checked' : ''} />
-                  <label for="${size}" class="size-item"><span class="menu__icon"><span>${size.toUpperCase()}</span></span>${product.sizes[size].size}</label>
-                `).join('')}
-              </div>
-              <p class="popup__txt">Additives</p>
-              <div class="add">
-                ${product.additives.map((additive, index) => `
-                  <input type="radio" class="custom-radio" id="${index + 1}-add"/>
-                  <label for="${index + 1}-add" class="add-item"><span class="menu__icon"><span>${index + 1}</span></span><span>${additive.name}</label>
-                `).join('')}
-              </div>
-              <div class="form-price">
-                <p class="card__subtitle">Total:</p>
-                <p class="card__subtitle">$${product.price}</p>
-              </div>
-              <div class="popup__info">
-                <span class="popup__icon"></span>
-                <p class="popup__text">The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and enjoy your favorite coffee with up to 20% discount.</p>
-              </div>
-            </form>
-            <button class="popup__btn">Close</button>                            
-          </div>
-        </div>
-  `;
+function popupShow(product) {
+  let popup = document.createElement('div');
+  popup.classList.add('popup');
   
+  let basePrice = parseFloat(product.price);
+  let totalPrice = basePrice;
+
+  popup.innerHTML = `
+    <div class="popup__wrap">
+      <div class="popup__col left">
+        <div class="popup__img">
+          <img src="${product.image}" class="image" alt="Product">
+        </div>
+      </div>
+      <div class="popup__col right">
+        <h4 class="card__subtitle">${product.name}</h4>
+        <p class="card__txt">${product.description}</p>
+        <form action="" class="form">
+          <p class="popup__txt">Size</p>
+          <div class="size">
+            ${Object.keys(product.sizes).map((size) => `
+              <input type="radio" name="size" class="custom-radio" id="${size}" value="${size}" ${size === 's' ? 'checked' : ''} />
+              <label for="${size}" class="size-item"><span class="menu__icon"><span>${size.toUpperCase()}</span></span>${product.sizes[size].size}</label>
+            `).join('')}
+          </div>
+          <p class="popup__txt">Additives</p>
+          <div class="add">
+            ${product.additives.map((additive, index) => `
+              <input type="radio" class="custom-radio" id="${index + 1}-add" name="additive" value="${additive['add-price']}" />
+              <label for="${index + 1}-add" class="add-item"><span class="menu__icon"><span>${index + 1}</span></span><span>${additive.name}</span></label>
+            `).join('')}
+          </div>
+          <div class="form-price">
+            <p class="card__subtitle">Total:</p>
+            <p class="total-price">$${totalPrice.toFixed(2)}</p>
+          </div>
+          <div class="popup__info">
+            <span class="popup__icon"></span>
+            <p class="popup__text">The cost is not final. Download our mobile app to see the final price and place your order.</p>
+          </div>
+        </form>
+        <button class="popup__btn">Close</button>                            
+      </div>
+    </div>
+  `;
+
+  popup.querySelectorAll('input[name="size"]').forEach((sizeInput) => {
+    sizeInput.addEventListener('change', (event) => {
+      totalPrice = basePrice + parseFloat(product.sizes[event.target.value]['add-price']);
+      updateTotalPrice();
+    });
+  });
+
+  popup.querySelectorAll('input[name="additive"]').forEach((additiveInput) => {
+    additiveInput.addEventListener('change', (event) => {
+      const additivePrice = parseFloat(event.target.value);
+      totalPrice += additivePrice;
+      updateTotalPrice();
+    });
+  });
+
+  function updateTotalPrice() {
+    popup.querySelector('.total-price').textContent = `$${totalPrice.toFixed(2)}`;
+  }
+
   let overlay = document.createElement('div');
   overlay.classList.add('overlay');
   overlay.appendChild(popup);
-
+  
   productsBox.appendChild(overlay);
   document.body.style.overflow = "hidden";
-  const closeButton = document.querySelector('.popup__btn');
-  const popupElement = document.querySelector('.popup');
 
+  const closeButton = popup.querySelector('.popup__btn');
   closeButton.addEventListener('click', function() {
     overlay.remove();
     document.body.style.overflow = "auto";
@@ -828,17 +850,14 @@ for (let i = 0; i < productCards.length; i++) {
   productCards[i].addEventListener('click', function() {
     popupShow(products[i]);
   });
-};
+}
 
-// Button More
 const menuMoreBtn = document.querySelector('.menu__more');
-    const menuCards = document.querySelectorAll('.menu__card');
+const menuCards = document.querySelectorAll('.menu__card');
 
-    menuMoreBtn.addEventListener('click', () => {
-        menuCards.forEach((card) => {
-            card.classList.remove('hidden');
-        });
-        menuMoreBtn.classList.add('hidden');
+menuMoreBtn.addEventListener('click', () => {
+    menuCards.forEach((card) => {
+        card.classList.remove('hidden');
+    });
+    menuMoreBtn.classList.add('hidden');
 });
-
-
